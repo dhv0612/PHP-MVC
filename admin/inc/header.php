@@ -1,8 +1,20 @@
 <?php
+
+    // include '../../lib/session.php';
+    // // include_once $_SERVER['DOCUMENT_ROOT']. '/PHP-MVC/lib/session.php';
+    // Session::checkSession();     
+?>  
+<?php
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 
   header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
   header("Cache-Control: max-age=2592000");
+?>
+
+<?php
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'../../lib/session.php');
+Session::checkSession();
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,8 +64,17 @@
                         <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
-                            <li>Hello Admin</li>
-                            <li><a href="#">Logout</a></li>
+                            <li>Hello 
+                                <?php 
+                                    echo Session::get('adminName')
+                                ?>
+                            </li>
+                            <li><a href="?action=logout">Logout</a></li>
+                            <?php
+                                if (isset($_GET['action'])&& $_GET['action']== 'logout'){
+                                    Session::destroy();
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>

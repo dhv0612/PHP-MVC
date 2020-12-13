@@ -1,11 +1,11 @@
-﻿<?php include 'inc/header.php';?>
+<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<?php include '../classes/category.php'?>
+<?php include '../classes/brand.php'?>
 <?php
-$cate = new category();
+$brand = new brand();
 if(isset($_GET['delid'])|| ($GET['delid']) != null){
 	$id = $_GET['delid']; 
-	$delete_cate = $cate->delete_category($id);
+	$delete_brand = $brand->delete_brand($id);
 }
 
 
@@ -13,11 +13,11 @@ if(isset($_GET['delid'])|| ($GET['delid']) != null){
 
 <div class="grid_10">
     <div class="box round first grid">
-		<h2>Category List</h2>
+		<h2>Brand List</h2>
 		<?php
-				if (isset($delete_cate))
+				if (isset($delete_brand))
 				{
-                    echo $delete_cate;
+                    echo $delete_brand;
                 }
             ?>
         <div class="block">
@@ -27,27 +27,27 @@ if(isset($_GET['delid'])|| ($GET['delid']) != null){
                 <thead>
                     <tr>
                         <th>Serial No.</th>
-                        <th>Category Name</th>
+                        <th>Brand Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-						$show_cate = $cate->show_category();
+						$show_brand = $brand->show_brand();
 							
-						if($show_cate)
+						if($show_brand)
 						{
 							$i=0;
-							while($result = $show_cate->fetch_assoc())
+							while($result = $show_brand->fetch_assoc())
 							{
 								$i++;				
                     			echo "<tr class='odd gradeX'>";
                         		echo "<td>",$i,"</td>";
-								echo "<td>", $result['cat_Name'],"</td>";
+								echo "<td>", $result['brand_Name'],"</td>";
 								?>
-                    <td><a href="catedit.php?cat_Id= <?php echo $result['cat_Id']?>">Edit</a> || <a
+                    <td><a href="brandedit.php?brand_Id= <?php echo $result['brand_Id']?>">Edit</a> || <a
                             onclick="return confirm('Are you want to delete ?')"
-                            href="?delid=<?php echo $result['cat_Id']?>">Delete</a></td>
+                            href="?delid=<?php echo $result['brand_Id']?>">Delete</a></td>
                     <?php
 								echo "</tr>";				
 							}
